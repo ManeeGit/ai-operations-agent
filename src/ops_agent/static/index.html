@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0c1016">
+  <meta name="description" content="A local-first operations console for synthetic service telemetry, evidence-based incident triage, and human-reviewed recommendations.">
+  <title>AI Operations Agent · Console</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to console</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Console navigation">
+      <a class="brand" href="#overview" aria-label="AI Operations Agent overview">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>signal<span class="brand-subtitle">AI OPERATIONS AGENT</span></span>
+      </a>
+      <div class="workspace-label"><span class="workspace-icon" aria-hidden="true">S</span><span>Local workspace<small>Single-operator console</small></span></div>
+      <p class="nav-label">WORKSPACE</p>
+      <nav>
+        <a class="nav-item active" href="#overview"><span aria-hidden="true">◫</span>Overview<span class="nav-key" aria-hidden="true">01</span></a>
+        <a class="nav-item" href="#incidents"><span aria-hidden="true">◎</span>Incidents<span class="nav-count" id="nav-incident-count">0</span></a>
+        <a class="nav-item" href="#activity"><span aria-hidden="true">≋</span>Agent activity</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="runtime-card">
+          <span class="eyebrow">DIAGNOSIS ENGINE</span>
+          <div class="runtime-name"><span class="status-dot mint" aria-hidden="true"></span><span id="engine-label">Connecting…</span></div>
+          <p id="engine-description">Loading runtime information.</p>
+          <div class="runtime-rule"><span aria-hidden="true">◇</span> Human-reviewed steps</div>
+        </div>
+        <div class="sidebar-foot"><span class="local-icon" aria-hidden="true">⌘</span><span>Built to observe.<br><strong>Never to act unattended.</strong></span></div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar"><div class="breadcrumb">Workspace<span>/</span><strong>Observability</strong></div><div class="topbar-right"><span class="badge neutral" id="mode-badge">Connecting</span><span class="connection-state" id="connection-state"><span class="status-dot" aria-hidden="true"></span><span id="connection-label">Connecting</span></span></div></header>
+      <main id="main">
+        <section id="overview" class="overview-section" aria-labelledby="page-title">
+          <div class="page-heading"><div><p class="eyebrow accent">OBSERVE. UNDERSTAND. REVIEW.</p><h1 id="page-title">Operations overview<span class="title-dot">.</span></h1><p class="page-subtitle">Your signals, connected. Your next step, grounded in evidence.</p></div><div class="refresh-group"><span id="last-updated">Waiting for first sample</span><button class="button button-subtle" id="refresh-button" type="button"><span aria-hidden="true">↻</span> Refresh</button></div></div>
+          <div class="error-banner" id="error-banner" role="alert" hidden><span class="error-icon" aria-hidden="true">!</span><div><strong id="error-title">Connection interrupted</strong><p id="error-message">Retrying automatically. Last received data remains visible.</p></div><button class="button button-subtle" id="retry-button" type="button">Retry now</button></div>
+          <section class="scenario-panel" id="scenario-panel" aria-labelledby="scenario-title"><div class="scenario-copy"><span class="scenario-icon" aria-hidden="true">⌁</span><div><p class="eyebrow">SYNTHETIC PLAYGROUND</p><h2 id="scenario-title">Break the demo. Not production.</h2><p>Inject a sample scenario and follow the evidence. No real services are changed.</p></div></div><div class="scenario-actions" aria-label="Generate synthetic scenario"><button class="scenario-button" type="button" data-scenario="healthy"><span class="scenario-dot mint" aria-hidden="true"></span>Healthy</button><button class="scenario-button" type="button" data-scenario="latency"><span aria-hidden="true">↗</span>Latency</button><button class="scenario-button" type="button" data-scenario="errors"><span aria-hidden="true">!</span>Errors</button><button class="scenario-button" type="button" data-scenario="memory"><span aria-hidden="true">▥</span>Memory</button><button class="scenario-button cascade-button" type="button" data-scenario="cascade"><span aria-hidden="true">ϟ</span>Cascade</button></div></section>
+          <div class="monitor-note" id="monitor-note" hidden><span class="status-dot mint" aria-hidden="true"></span>Monitor mode · observing configured telemetry. Recommendations require human review.</div>
+          <div class="stats-grid" aria-label="Operations statistics">
+            <article class="stat-card"><div class="stat-top"><h2>Telemetry samples</h2><span class="stat-icon" aria-hidden="true">≋</span></div><div class="stat-value" id="stat-samples">—</div><p>Observed by the local agent</p></article>
+            <article class="stat-card"><div class="stat-top"><h2>Open incidents</h2><span class="stat-icon warm" aria-hidden="true">◎</span></div><div class="stat-value" id="stat-open">—</div><p id="stat-total-description">Waiting for incident data</p></article>
+            <article class="stat-card"><div class="stat-top"><h2>Model calls</h2><span class="stat-icon lavender" aria-hidden="true">✧</span></div><div class="stat-value" id="stat-model-calls">—</div><p id="model-call-description">Optional local model inference</p></article>
+            <article class="stat-card"><div class="stat-top"><h2>Model failures</h2><span class="stat-icon mint-text" aria-hidden="true">◇</span></div><div class="stat-value" id="stat-model-failures">—</div><p>Rule-based fallback available</p></article>
+          </div>
+          <section class="services-section" aria-labelledby="services-title"><div class="section-heading"><div><h2 id="services-title">Service health <span class="section-count" id="service-count">0</span></h2><p>A live snapshot of the latest service telemetry.</p></div><span class="section-note"><span class="status-dot mint" aria-hidden="true"></span>Auto-refresh · 5s</span></div><div class="services-grid" id="services-grid"><div class="empty-state loading-state"><span class="loading-ring" aria-hidden="true"></span><h3>Connecting to the agent</h3><p>Service telemetry will appear here.</p></div></div></section>
+        </section>
+        <section id="incidents" class="incidents-section" aria-labelledby="incidents-title"><div class="section-heading"><div><h2 id="incidents-title">Incident workspace</h2><p>Follow the signal from detection to a reviewable recommendation.</p></div><span class="badge neutral"><span aria-hidden="true">◇</span> Read, review, decide</span></div><div class="incident-workspace"><aside class="incident-queue" aria-label="Incident queue"><div class="queue-heading"><h3>Incident queue</h3><div class="segmented" aria-label="Filter incidents"><button class="segment active" type="button" id="filter-active" aria-pressed="true">Active</button><button class="segment" type="button" id="filter-all" aria-pressed="false">All</button></div></div><div class="incident-list" id="incident-list"><div class="queue-empty"><span aria-hidden="true">◎</span><p>Waiting for incidents</p></div></div><div class="queue-footer"><span class="status-dot mint" aria-hidden="true"></span>Correlated signals, fewer distractions</div></aside><article class="incident-detail" id="incident-detail" aria-label="Selected incident"><div class="detail-empty"><div class="empty-orbit" aria-hidden="true"><span>◎</span></div><p class="eyebrow">EVIDENCE BEFORE ACTION</p><h3>Quiet is a good signal.</h3><p>No incident selected. Generate a demo scenario to explore detection, diagnosis, and human-reviewed next steps.</p></div></article></div></section>
+        <section id="activity" class="activity-section" aria-labelledby="activity-title"><div class="section-heading"><div><h2 id="activity-title">Agent activity</h2><p>A transparent record of what the agent observed and did.</p></div><span class="badge neutral" id="event-count">0 events</span></div><div class="activity-panel"><div class="activity-table-heading" aria-hidden="true"><span>TIME · LOCAL</span><span>EVENT</span><span>DETAIL</span></div><ol class="activity-list" id="activity-list"><li class="activity-empty">Agent events will appear here.</li></ol></div></section>
+        <footer class="footer"><div><span class="footer-mark" aria-hidden="true">◇</span><strong>Local-first. Human-led.</strong><p id="privacy-copy">Demo telemetry is synthetic. Data is served by your local agent; optional Ollama inference uses the fixed loopback endpoint.</p></div><p class="footer-caution">Diagnoses are hypotheses, not verified root causes.<br>Review every recommendation. No remediation is executed.</p></footer>
+      </main>
+    </div>
+  </div>
+  <div id="announcement" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <noscript><div class="noscript">This console needs JavaScript to read the local agent API. Enable JavaScript and reload.</div></noscript>
+</body>
+</html>

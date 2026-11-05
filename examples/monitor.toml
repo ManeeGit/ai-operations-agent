@@ -1,0 +1,9 @@
+# Only numeric loopback URLs are accepted. No remote monitoring or redirects.
+[agent]
+interval_seconds = 5
+
+[[services]]
+name = "example-api"
+health_url = "http://127.0.0.1:9000/health"
+# Optional, resolved relative to this file. Never enable for sensitive production logs.
+# log_file = "../.ops-agent/example.log"

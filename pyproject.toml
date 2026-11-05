@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-operations-agent"
+version = "0.1.0"
+description = "Local-first incident detection, evidence retrieval, and human-reviewed AI triage"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "AI Operations Agent contributors"}]
+dependencies = []
+
+[project.scripts]
+ops-agent = "ops_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ops_agent = ["static/*", "runbooks.json"]

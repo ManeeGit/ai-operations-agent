@@ -1,0 +1,12 @@
+[
+  {"name":"quiet baseline", "scenario":"healthy", "expected":[]},
+  {"name":"sustained latency", "scenario":"latency", "expected":["checkout-api/latency"]},
+  {"name":"sustained errors", "scenario":"errors", "expected":["payments-gateway/errors"]},
+  {"name":"memory pressure", "scenario":"memory", "expected":["inventory-worker/memory"]},
+  {"name":"multi-service cascade", "scenario":"cascade", "expected":["checkout-api/latency","payments-gateway/errors","inventory-worker/memory"]},
+  {"name":"isolated spike suppressed", "scenario":"spike", "expected":[]},
+  {"name":"confirmed health failure", "scenario":"availability", "expected":["checkout-api/availability"]},
+  {"name":"CPU saturation", "scenario":"cpu", "expected":["inventory-worker/cpu"]},
+  {"name":"healthy recovery", "scenario":"recovery", "expected":[]},
+  {"name":"log prompt injection", "scenario":"injection", "expected":["inventory-worker/memory"]}
+]
