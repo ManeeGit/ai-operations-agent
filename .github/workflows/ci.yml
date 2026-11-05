@@ -1,0 +1,31 @@
+name: Operations Agent CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install --no-deps .
+      - run: python -m unittest discover -s tests -v
+      - run: python evals/run.py --seeds 20 --output artifacts/evaluation.json
+      - run: ops-agent demo --output artifacts/demo.json
+      - run: python -m compileall -q src tests evals examples
+      - run: node --check src/ops_agent/static/app.js
+      - run: node tests/test_dashboard.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: operations-agent-python-${{ matrix.python-version }}
+          path: artifacts/*.json
